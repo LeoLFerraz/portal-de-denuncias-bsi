@@ -1,0 +1,31 @@
+
+<div class=" container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Status</th>
+      <th scope="col">Opção</th>
+
+    </tr>
+  </thead>
+  <% membros.forEach( membro => { %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= membro.id%></th>
+      <td><%= membro.nome %></td>
+      <td><%= membro.email %></td>
+      <% if( membro.status == 0 ) {%>
+      <td> Ativo</td>
+      <td><button type="button" class="btn btn-outline-danger">Desativar</button></td>
+      <% } else { %>
+      <td> Inativo </td>
+      <td><button type="button" class="btn btn-outline-success">Ativar</button></td>
+      <% }%>
+    </tr>
+  </tbody>
+  <% }); %>
+</table>
+ </div>

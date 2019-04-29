@@ -19,6 +19,7 @@ const upload = multer({
     }
 });
 const passport = require("passport");
+const {ensureAuthenticated, forwardAuthenticated} = require('../configs/auth');
 
 
 // GET routes:
@@ -62,7 +63,7 @@ router.get('/admin/usuarios',(req, res) => {
 } );
 
 // Tela de admin
-router.get('/admin/cadastrousuario', (req, res) => {
+router.get('/admin/cadastrousuario', ensureAuthenticated, (req, res) => {
     res.render('../views/cadastrousuario.ejs');
 });
 
@@ -70,17 +71,27 @@ router.get('/404', (req, res) => {
     res.render('../views/404.ejs');
 });
 
-router.get('/admin/login', (req, res) => {
+router.get('/admin/login', forwardAuthenticated, (req, res) => {
     res.render('../views/login.ejs');
 });
 
-router.get('/admin/home', (req, res) => {
-    res.render('../views/adminhome.ejs');
+router.get('/admin/home', ensureAuthenticated, (req, res) => {
+    console.log(req.isAuthenticated())
+    Denuncia.find()
+        .sort({
+            datahoraSubmissao: -1
+        })
+        .limit(100)
+        .then(denuncias => {
+            Usuario.find().then(usuarios => {
+                res.render('../views/adminhome.ejs', {denuncias, usuarios});
+            })
+        });
 });
 
-router.get('/admin/logout', (req, res) => {
+router.get('/admin/logout', ensureAuthenticated, (req, res) => {
     req.logout();
-    //req.flash('success_msg', 'You are logged out!');
+    req.flash('success_msg', 'You are logged out!');
     res.redirect('/admin/login');
 });
 

@@ -1,3 +1,11 @@
+*{
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -6,26 +14,37 @@ body{
 
 /*SECTION Header*/
 header{
-    font-family:font85995;
     background-color: #2A2B2E;
-    padding:20px 0px;
+    padding-top: 30px;
     margin-bottom:20px;
 }
 
 header h1{
-    font-family:font85995;
-    font-size: 55px;
+    font-size: 47px;
     color:#fff;
 }
 
 header a{
-    padding: 10px;
+    padding: 10px 10px 10px 0px;
+    color:rgb(255, 255, 255);
+    font-size: 17px;
 }
+
+header a:hover{
+    color:rgb(206, 204, 204);
+    text-decoration: none;
+}
+
 
 .header-display{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+header nav{
+    background-color: rgb(34, 34, 34);
+    padding: 10px;
 }
 
 /*SECTION Footer*/
@@ -92,7 +111,7 @@ textarea{
 }
 
 .logo{
-   margin-left: 12%;
+    margin-left: 12%;
 }
 
 .table td{
@@ -105,8 +124,36 @@ textarea{
 
 .tagSolucionada{
     background: rgb(21, 192, 30);
+
 }
 
 .tagCancelada{
     background: rgb(255, 60, 46);
+}
+
+.tamanhoEtiquetas{
+    width: 25px;
+}
+
+.PrincipalError{
+    text-align: center;
+    font-size: 28px;
+}
+
+.PrincipalError img{
+    width: 500px;
+}
+
+.formLogin{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.formEdicao{
+    border:2px solid #dee3e4;
+    border-radius: 5px;
+    padding: 20px;
+    width: 60%;
+    margin: 44.5px 0px;
 }

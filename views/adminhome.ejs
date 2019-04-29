@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <% include components/projectDefaultHead/projectDefaultHead %>
-</head>
-<body>
-<% include components/header/projectDefaultHeader %>
+    <head>
+        <% include components/projectDefaultHead/projectDefaultHead %>
+    </head>
+    <body>
+        <% include components/header/projectHeaderAdmin %>
+    <main>
+        <% include components/relatorio/relatorioDenunciasAdmin%>
+    </main>
+        <% include components/footer/projectDefaultFooter %>
 
-<main>
-
-    <h1>Admin Home!</h1>
-
-</main>
-
-
-
-<% include components/footer/projectDefaultFooter %>
-
-<% include components/projectDefaultScripts/projectDefaultScripts %>
-</body>
+        <% include components/projectDefaultScripts/projectDefaultScripts %>
+    </body>
 </html>

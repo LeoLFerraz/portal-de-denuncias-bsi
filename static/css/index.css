@@ -19,6 +19,17 @@
     min-width:25%;
 }
 
+.espacoTabela{
+    width:10%;
+}
+.espacoDenuncia{
+    width:50%;
+
+}
+.espacoObservacao{
+    widows: 25%;
+}
+
 .table{
     text-align: center;
     border: 2px solid #00ace6;

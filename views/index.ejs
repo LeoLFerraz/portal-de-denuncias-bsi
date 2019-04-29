@@ -93,28 +93,9 @@
                     </form>
                 </div>
 
-                <table class="table table-bordered table-responsive table-striped  ">
-                    <thead>
-                    <tr>
-                        <th>Responsável</th>
-                        <th>Data</th>
-                        <th>Denúncia</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     <% denuncias.forEach(denuncia => { %>
-                    <tr>
-                        <td><%= denuncia.responsavel || "Sem responsável" %></td>
-                        <td><%= denuncia.datahoraSubmissao.toISOString().replace(/T/, ' ').replace(/\..+/, '') %></td>
-                        <td class="tdDenuncia"><%= denuncia.descricao%></td>
-                        <td>
-                            <span class="tagSolucionada" data-placement="bottom" data-toggle="popover" title="Solução" data-content="A denúncia foi aceita e o responsável foi punido"><%= denuncia.status %></span>
-                        </td>
-                    </tr>
-                     <% }); %>
-                    </tbody>
-                </table>
+                <div class="container">
+                    <% include components/relatorio/relatorioDenunciasPublico %>
+                </div>
             </div>
         </main>
         <% include components/footer/projectDefaultFooter %>

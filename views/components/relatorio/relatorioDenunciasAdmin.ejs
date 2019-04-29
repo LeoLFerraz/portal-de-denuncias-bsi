@@ -1,0 +1,86 @@
+ <div class="container">
+      <div class="filtragem">
+        <div><span>Filtrar Relatório</span></div>
+        <form class="row">
+          <div class="col-lg-3 mb-3">
+            <legend>Status:</legend>
+            <select class="custom-select" id="formStatus myInput">
+              <option selected>Submetida</option>
+              <option value="1">Aprovada - NAPE</option>
+              <option value="2">Aprovada - Comissão</option>
+              <option value="3">Solucionada</option>
+              <option value="4">Cancelada</option>
+            </select>
+          </div>
+
+          <div class="col-lg-3">
+            <legend>Data de Submissão:</legend>
+            <select class="custom-select" id="formStatus">
+              <option selected>Hoje</option>
+              <option value="1">Ontem</option>
+              <option value="2">Nesta Semana</option>
+              <option value="3">Semana Passada</option>
+              <option value="4">Mês passado</option>
+            </select>
+          </div>
+
+          <div class="col-lg-3">
+            <button type="button" class="btn btn-primary">Filtrar</button>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <table class="table table-bordered table-responsive table-striped">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Responsável</th>
+              <th>Data</th>
+              <th>Denúncia</th>
+              <th>Status</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody class="tableMembroAutenticado">
+           <% denuncias.forEach(denuncia => { %>
+            <tr class="">
+              <td><%=  denuncia.email %></td>
+              <td class="nomeFormat">
+                <form>
+                  <div class="form-row">
+                    <select class="custom-select statusSelect" id="formStatus">
+                      <%usuarios.forEach(usuario => { %>
+                        <option> <%= usuario.nome %> </option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </form>
+              </td>
+              <td>
+                <%= denuncia.datahoraSubmissao.toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
+              </td>
+              <td>
+                <%= denuncia.descricao%>
+              </td>
+              <td class="statusFormat">
+                <form>
+                  <div class="form-row">
+                    <select class="custom-select statusSelect" id="formStatus">
+                      <option disabled value="0">Submetida</option>
+                      <option selected value="1">Aprovada - Em Revisão pela Comissão</option>
+                      <option value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
+                      <option value="3">Solucionada</option>
+                      <option value="4">Cancelada</option>
+                    </select>
+                  </div>
+                </form>
+              </td>
+              <td><%= denuncia.descricao%></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
