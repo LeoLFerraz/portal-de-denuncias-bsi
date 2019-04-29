@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include components/projectDefaultHead/projectDefaultHead %>
+    </head>
+    <body >
+        <% include components/header/projectDefaultHeader %>
+        <main>
+            <% include components/flashMsg/messages.ejs %>
+            <div class="container d-flex justify-content-around mt-5">
+                    <form action="/admin/login" method="post">
+                        <div class="form-group ">
+                            <label for="User">Usuário</label>
+                            <input type="email" class="form-control"  id="user" name="user" placeholder="Digite o usuário">
+                        </div>
+                        <div class="form-group ">
+                            <label for="senha">Senha</label>
+                            <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                        </div>
+                        <button type="submit" class="btn btn-dark mb-5 ">Acessar</button>
+                    </form>
+            </div>
+        </main>
+        <% include components/footer/projectDefaultFooter %>
+
+        <% include components/projectDefaultScripts/projectDefaultScripts %>
+    </body>
+</html>

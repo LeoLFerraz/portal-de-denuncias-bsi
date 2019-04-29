@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include components/projectDefaultHead/projectDefaultHead %>
+    </head>
+    <body>
+        <% include components/header/projectDefaultHeader %>
+        <main>
+                <div class="container espacamentoPadrao">
+                        <div class="telaMembros row">
+                            <p>
+                                A comissão é formada pelos representantes de classe eleitos pelo BSI e pelo NAPE. Aqui
+                                estão os membros ativos da comissão:
+                            </p>
+                            <div class="d-flex justify-content-between container flex-wrap">
+                            <% usuarios.forEach(usuario =>{ %>
+                                    <div class="card cardComissao mr-3 mb-2">
+                                        <img src="<%= "../uploads/" + usuario.fotoPathname %>" class="card-img-top fotoPerfilComissao" alt="foto de perfil de um usuário">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= usuario.nome %></h5>
+                                            <p class="card-text"><%= usuario.observacaoPublica %></p>
+                                        </div>
+                                    </div>
+                           <% }); %>
+                            </div>
+                      </div>
+                      </div>
+        </main>
+        <% include components/footer/projectDefaultFooter %>
+
+        <% include components/projectDefaultScripts/projectDefaultScripts %>
+    </body>
+</html>
