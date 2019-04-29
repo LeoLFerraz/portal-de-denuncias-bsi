@@ -1,3 +1,4 @@
+<% if(!req.isAuthenticated()) {%>
 <header>
     <div class="container">
         <div class="header-display">
@@ -12,3 +13,21 @@
         </div>
     </nav>
 </header>
+<%} else {%>
+<header>
+    <div class="container">
+        <div class="header-display">
+            <h1>Portal de Denúncias BSI</h1>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <a href="/">Inicio</a>
+            <a href="/comissao">Comissão</a>
+            <a href="/admin/cadastrousuario">Cadastrar</a>
+            <a href="/admin/home">Relatorio</a>
+            <a href="/admin/logout">Sair</a>
+        </div>
+    </nav>
+</header>
+<%}%>

@@ -34,9 +34,7 @@ router.get('/', (req, res) => {
         datahoraSubmissao: -1 // Mostrará em ordem decrescente de submissão.
     }).limit(20).then(denuncias => {
         console.log("Renderizando index.ejs com denuncias por get em '/'.");
-        res.render('../views/index.ejs', {
-            denuncias: denuncias
-        });
+        res.render('../views/index.ejs', {denuncias, req});
     }).catch(err => console.log(err))
     // TODO: Paginação (exibir mais de 20 denúncias).
 });
@@ -51,32 +49,29 @@ router.get('/comissao', (req, res) => {
     }).then(usuarios => {
         console.log("Renderizando comissao.ejs com denuncias por get em '/'.");
         console.log(usuarios[0]);
-        res.render('../views/comissao.ejs', {
-            usuarios: usuarios
-        });
+        res.render('../views/comissao.ejs', {usuarios, req});
     }).catch(err => console.log(err));
 });
 
 // Tela de admin para administração de usuários.
 router.get('/admin/usuarios',(req, res) => {
-    res.render('../views/usuarios.ejs');
+    res.render('../views/usuarios.ejs', {req});
 } );
 
 // Tela de admin
 router.get('/admin/cadastrousuario', ensureAuthenticated, (req, res) => {
-    res.render('../views/cadastrousuario.ejs');
+    res.render('../views/cadastrousuario.ejs', {req});
 });
 
 router.get('/404', (req, res) => {
-    res.render('../views/404.ejs');
+    res.render('../views/404.ejs', {req});
 });
 
 router.get('/admin/login', forwardAuthenticated, (req, res) => {
-    res.render('../views/login.ejs');
+    res.render('../views/login.ejs', {req});
 });
 
 router.get('/admin/home', ensureAuthenticated, (req, res) => {
-    console.log(req.isAuthenticated())
     Denuncia.find()
         .sort({
             datahoraSubmissao: -1
@@ -84,14 +79,14 @@ router.get('/admin/home', ensureAuthenticated, (req, res) => {
         .limit(100)
         .then(denuncias => {
             Usuario.find().then(usuarios => {
-                res.render('../views/adminhome.ejs', {denuncias, usuarios});
+                res.render('../views/adminhome.ejs', {denuncias, usuarios, req});
             })
         });
 });
 
 router.get('/admin/logout', ensureAuthenticated, (req, res) => {
     req.logout();
-    req.flash('success_msg', 'You are logged out!');
+    req.flash('success_msg', 'Você está desautenticado! :)');
     res.redirect('/admin/login');
 });
 
@@ -118,7 +113,6 @@ router.post('/', (req, res) => {
             res.status(500).send("Problema no servidor. Denúncia não foi enviada.");
         });
 }); // Nova denúncia
-
 router.post('/admin/cadastrousuario', upload.single('avatar'), (req, res) => {
     let {nome, email, dataAniversario, observacaoPublica, senha} = req.body;
     // Validando informações:
@@ -150,7 +144,7 @@ router.post('/admin/cadastrousuario', upload.single('avatar'), (req, res) => {
         console.log("Erros detectados, re-renderizando.");
         console.log(erros);
         console.log(erros.length);
-        res.render("cadastrousuario.ejs", {erros});
+        res.render("cadastrousuario.ejs", {erros, req});
         return;
     }
     // TODO: Encapsular validação de informações nas classes do modelo.
