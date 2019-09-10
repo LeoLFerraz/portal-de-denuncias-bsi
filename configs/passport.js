@@ -24,7 +24,9 @@ module.exports = function(passport) {
                     return done(null, user);
                 }
                 else {
-                    return done(null, false);
+                    return done(null, false, {
+                        message: "Combinação email/senha não encontrada."
+                    });
                 }
             }).catch(err => console.log(err));
         })

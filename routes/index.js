@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require("path");
+const fs = require("fs");
 const Usuario = require('../models/usuarioModel');
 const Denuncia = require('../models/denunciaModel');
 const multer = require("multer");
@@ -47,8 +48,13 @@ router.get('/comissao', (req, res) => {
     }).sort({
         nome: 1 // Mostrará em ordem decrescente de submissão.
     }).then(usuarios => {
-        console.log("Renderizando comissao.ejs com denuncias por get em '/'.");
-        console.log(usuarios[0]);
+        usuarios.forEach(usuario => {
+            let usuarioFotoPath = "../uploads/" + usuario.fotoPathname;
+            if(usuario.fotoPathname == undefined) {
+                usuario.fotoPathname = "usuariosemfoto.png";
+                usuarioFotoPath = "../uploads/" + usuario.fotoPathname;
+            }
+        });
         res.render('../views/comissao.ejs', {usuarios, req});
     }).catch(err => console.log(err));
 });
