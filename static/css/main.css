@@ -71,6 +71,15 @@ footer{
     font-size: 35px;
 }
 
+.logo{
+    text-align: center;
+}
+
+.logo img{
+    max-width:50%;
+    height:auto;
+}
+
 .formatacao-formulario{
     border:2px solid #dee3e4;
     border-radius: 5px;
