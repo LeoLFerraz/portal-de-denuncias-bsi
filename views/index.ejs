@@ -29,68 +29,15 @@
 
             <div class="container espacamentoPadrao conteudo-style">
                 <span>
-                  O Portal de Denúncias do BSI foi desenvolvido com o intuito de facilitar
-                  e transparecer o processo de submissão de denúncias e reclamações da
-                  comunidade acadêmica. Uma denúncia submetida é averiguada pela
+                  O Portal de Mediação de Conflitos do BSI foi desenvolvido com o intuito de facilitar
+                  e transparecer o processo de submissão de reclamações da
+                  comunidade acadêmica. Uma reclamação submetida é averiguada pela
                   <a href="/comissao">comissão</a> e encaminhada ao público adequado, como o NAPE,
                   a diretoria ou a decania.
                 </span>
 
                 <div>
-                    <form action="/" method="POST" id="formDenuncia">
-                        <div class="form-group formatacao-formulario">
-                            <h2>FAÇA SUA DENÚNCIA</h2>
-                            <div class="row">
-                                <div class="col-6">
-                                    <legend>Descrição da sua Denúncia:</legend>
-                                    <textarea class="form-control"  name="descricao" id="textDenuncia" rows="9"></textarea>
-                                </div>
-
-                                <div class="col-6 formDetalhe">
-                                    <div>
-                                        <legend>
-                                            Visibilidade da denúncia:
-                                            <a href="#" data-toggle="tooltip"
-                                               title="Ao optar por ‘Visível para o público,’  você permite que sua denúncia conste no
-                                                    relatório público de denúncias caso ela seja aprovada pela comissão para tal.">
-                                                <i class="fas fa-question-circle"></i>
-                                            </a>
-                                        </legend>
-
-                                        <p>
-                                            <input type="radio" name="visibilidade" id="publico" value="1"/>
-                                            <label for="publico">Visível para o público</label>
-
-                                        </p>
-                                        <p>
-                                            <input type="radio" name="visibilidade" id="privado"  value="0"/>
-                                            <label for="privado">Visível apenas para a comissão</label>
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <legend>Email:</legend>
-                                        <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" />
-                                    </div>
-
-                                    <div>
-                                        <input type="checkbox" name="termos" id="termosObrigatorio" />
-                                        <label for="termosObrigatorio">Entendo a <a href="#" class="button-termos"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#termosDeUso">política de conduta</a></label> da comissão que receberá minha denúncia
-                                    </div>
-
-                                    <div>
-                                        <button type="submit" class="btn btn-outline-primary">
-                                            Submeter Formulário
-                                        </button>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <% include components/form/formDenuncia %>
                 </div>
 
                 <div class="container">
