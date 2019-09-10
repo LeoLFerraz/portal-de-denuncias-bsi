@@ -1,10 +1,10 @@
 <table class="table table-bordered table-responsive table-striped  ">
                     <thead class=" ">
                     <tr>
-                        <th class=" espacoTabela">Responsável</th>
-                        <th class=" espacoTabela">Data</th>
-                        <th style=" espacoDenuncia">Reclamação</th>
-                        <th class=" espacoTabela">Status</th>
+                        <th class="espacoTabela">Responsável</th>
+                        <th class="espacoTabela">Data</th>
+                        <th class="espacoDenuncia">Reclamação</th>
+                        <th class="espacoTabela">Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -12,10 +12,10 @@
                     <tr>
                        <td><%= denuncia.responsavel || "Sem responsável" %></td>
                        <td><%= denuncia.datahoraSubmissao.toISOString().replace(/T/, ' ').replace(/\..+/, '') %></td>
-                        <td class="tdDenuncia">
+                        <td class="tdDenuncia align-middle">
                             <%= denuncia.descricao%>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <% if(denuncia.status == 3) { %>
                                 <span class="tagSolucionada " data-placement="bottom" data-toggle="popover" title="Solução" data-content= "pq ss" >Solucionada</span>
                             <% } else if( denuncia.status == 1) { %>
