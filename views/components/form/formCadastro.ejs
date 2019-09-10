@@ -48,7 +48,7 @@
                         </div>
 
                         <div>
-                            <button class="btn btn-primary mt-2" type="submit">
+                            <button class="btn btn-primary mt-2" type="submit" id="submit">
                                 <span class="btncadastrar">Cadastrar</span>
                             </button>
                         </div>
@@ -57,16 +57,18 @@
                     <div class="col-3">
                         <label>Foto do usuário</label>
                         <div  class=" text-center" >
-                            <img src="http://lorempixel.com/240/230/people" alt=""/>
+                            <img src="../uploads/usuariosemfoto.png" alt="" id="previewImage">
                         </div>
 
                         <div class="input-group">
                             <input
                                     type="file"
-                                    class="custom-file-input"
+                                    class="form-control-file"
                                     id="avatar"
-                                    name="avatar">
-                            <label class="custom-file-label" for="avatar">Choose file</label>
+                                    name="avatar"
+                                    onchange="carregarPreview(event)"
+                                    data-buttonText="teste">
+                            <label class="custom-file-label" for="avatar" id="avatarLabel" style="overflow: hidden">Escolher Arquivo</label>
                         </div>
                     </div>
                 </div>
@@ -74,3 +76,22 @@
         </div>
     </form>
 </div>
+
+<script>
+    function carregarPreview(evt) {
+        if(evt.target.files[0].size > 1000000) {
+            document.getElementById("flashMsgContainer").innerHTML = "<div class='alert alert-danger alert-dismissible fade show'> Imagem muito grande. Por favor limite-se a 10MB. </div>";
+            document.getElementById("submit").disabled = true;
+        }
+        else if (evt.target.files[0].type != "image/png" && evt.target.files[0].type != "image/jpeg") {
+            document.getElementById("flashMsgContainer").innerHTML = "<div class='alert alert-danger alert-dismissible fade show'> O arquivo escolhido não é reconhecido como imagem. </div>";
+            document.getElementById("submit").disabled = true;
+        }
+        else {
+            document.getElementById("flashMsgContainer").innerHTML = ""
+            document.getElementById("submit").disabled = false;
+            document.getElementById("previewImage").src = URL.createObjectURL(evt.target.files[0]);
+            document.getElementById("avatarLabel").innerHTML = evt.target.files[0].name;
+        }
+    }
+</script>

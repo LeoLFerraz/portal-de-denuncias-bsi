@@ -11,12 +11,8 @@
 .fotoPerfilComissao {
     object-fit: cover;
     height: 250px;
-    width: 250px;
+    width: 100%;
     margin: auto auto;
-}
-
-.cardComissao {
-    min-width:25%;
 }
 
 .espacoTabela{
