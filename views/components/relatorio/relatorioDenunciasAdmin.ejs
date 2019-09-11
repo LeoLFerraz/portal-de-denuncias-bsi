@@ -66,7 +66,7 @@
               <td class="statusFormat align-middle">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" id="formStatus">
+                    <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= JSON.stringify(denuncia) %>')">
                       <option disabled value="0">Submetida</option>
                       <option selected value="1">Aprovada - Em Revisão pela Comissão</option>
                       <option value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
@@ -87,7 +87,7 @@
 
  <script>
      function atualizarResponsavel(nome, id){
-       data = {
+       let data = {
          nome: nome.value,
          id
        };
@@ -95,5 +95,15 @@
          console.log(data);
          console.log(status);
        });
+     }
+
+     function atualizarStatus(selectObj, denuncia) {
+         let denunciaModificada = JSON.parse(denuncia);
+         denunciaModificada.status = selectObj.value;
+         console.log(denunciaModificada);
+         $.post("/" + denunciaModificada.id, denunciaModificada, (data, status) => {
+             console.log(data);
+             console.log(status);
+         })
      }
 </script>
