@@ -77,7 +77,7 @@ router.get('/admin/login', forwardAuthenticated, (req, res) => {
     res.render('../views/login.ejs', {req});
 });
 
-router.get('/admin/home', ensureAuthenticated, (req, res) => {
+router.get('/admin/home',  (req, res) => {
     Denuncia.find()
         .sort({
             datahoraSubmissao: -1
@@ -191,5 +191,10 @@ router.post('/admin/login', (req, res) => {
         failureFlash: 'Usuário ou senha inválidos.'
     })(req, res);
 }); // Autenticação do usuário
+router.post('/admin/responsavel',  async(req,res)=>{
+    console.log(req.body);
+    //let denuncia = await Denuncia.findOne({_id : req.body.id});
+    //denuncia.responsavel = req.responsavel;
+});
 
 module.exports = router;

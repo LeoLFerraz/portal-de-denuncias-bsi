@@ -49,7 +49,7 @@
               <td class="nomeFormat">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" id="formStatus">
+                    <select class="custom-select statusSelect" id="formResponsavel" onchange="atualizarResponsavel(this,'<%= denuncia.id%>')">
                       <%usuarios.forEach(usuario => { %>
                         <option> <%= usuario.nome %> </option>
                       <% }); %>
@@ -82,5 +82,20 @@
           </tbody>
         </table>
       </div>
-    </div>
+ </div>
+
+
+ <script>
+     function atualizarResponsavel(nome, id){
+       data = {
+         nome: nome.value,
+         id
+       };
+       $.post("/admin/responsavel", data, (data, status) => {
+         console.log(data);
+         console.log(status);
+       });
+     };
+</script>
+
     
