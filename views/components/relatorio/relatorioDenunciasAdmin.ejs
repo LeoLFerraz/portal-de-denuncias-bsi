@@ -50,8 +50,9 @@
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= JSON.stringify(denuncia)%>')">
+                      <option disabled <% if(!denuncia.responsavel){%> selected <%}%>>Nenhum</option>
                       <%usuarios.forEach(usuario => { %>
-                        <option> <%= usuario.nome %> </option>
+                        <option <% if(usuario.nome == denuncia.responsavel){%> selected <%}%>> <%= usuario.nome %> </option>
                       <% }); %>
                     </select>
                   </div>
@@ -67,11 +68,11 @@
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= JSON.stringify(denuncia) %>')">
-                      <option disabled value="0">Submetida</option>
-                      <option selected value="1">Aprovada - Em Revisão pela Comissão</option>
-                      <option value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
-                      <option value="3">Solucionada</option>
-                      <option value="4">Cancelada</option>
+                      <option disabled <% if(denuncia.status == 0){%>selected<%}%> value="0">Submetida</option>
+                      <option <% if(denuncia.status == 1){%>selected<%}%> value="1">Aprovada - Em Revisão pela Comissão</option>
+                      <option <% if(denuncia.status == 2){%>selected<%}%> value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
+                      <option <% if(denuncia.status == 3){%>selected<%}%> value="3">Solucionada</option>
+                      <option <% if(denuncia.status == 4){%>selected<%}%> value="4">Cancelada</option>
                     </select>
                   </div>
                 </form>
