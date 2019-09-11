@@ -49,7 +49,7 @@
               <td class="nomeFormat align-middle">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= denuncia.id%>')">
+                    <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= JSON.stringify(denuncia)%>')">
                       <%usuarios.forEach(usuario => { %>
                         <option> <%= usuario.nome %> </option>
                       <% }); %>
@@ -86,15 +86,13 @@
 
 
  <script>
-     function atualizarResponsavel(nome, id){
-       let data = {
-         nome: nome.value,
-         id
-       };
-       $.post("/admin/responsavel", data, (data, status) => {
+     function atualizarResponsavel(selectObj, denuncia){
+       let denunciaModificada = JSON.parse(denuncia);
+       denunciaModificada.responsavel = selectObj.value;
+       $.post("/" + denunciaModificada.id, denunciaModificada, (data, status) => {
          console.log(data);
          console.log(status);
-       });
+       })
      }
 
      function atualizarStatus(selectObj, denuncia) {
