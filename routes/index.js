@@ -99,7 +99,6 @@ router.get('/admin/logout', ensureAuthenticated, (req, res) => {
 
 // POST routes:
 router.post('/', (req, res) => {
-    console.log("Post recebido em '/'.");
     let {descricao, visibilidade, email} = req.body;
     let datahoraSubmissao = new Date(); // Na view, forçamos o formato da data com o comando
                                         // ".toISOString().replace(/T/, ' ').replace(/\..+/, '')."
@@ -118,7 +117,7 @@ router.post('/', (req, res) => {
             console.log(err);
             res.status(500).send("Problema no servidor. Denúncia não foi enviada.");
         });
-}); // Nova denúncia
+}); // Nova denúncia.
 router.post('/admin/cadastrousuario', upload.single('avatar'), (req, res) => {
     let {nome, email, dataAniversario, observacaoPublica, senha} = req.body;
     // Validando informações:
@@ -183,13 +182,17 @@ router.post('/admin/cadastrousuario', upload.single('avatar'), (req, res) => {
             console.log(err);
             res.status(500).send("Problema salvando usuário");
         })
-}); // Novo usuário
+}); // Novo usuário.
 router.post('/admin/login', (req, res) => {
     passport.authenticate('local', {
         successRedirect: '/admin/home',
         failureRedirect: '/admin/login',
         failureFlash: 'Usuário ou senha inválidos.'
     })(req, res);
-}); // Autenticação do usuário
+}); // Autenticação do usuário.
+router.post('/:denunciaid', (req, res) => { // Update de denúncias. Especialmente importante para as requisições ajax do relatório administrativo.
+                                            // Espera-se receber o objeto inteiro, com todos seus atributos, independente de terem mudado ou não.
+    res.send("WIP");
+});
 
 module.exports = router;
