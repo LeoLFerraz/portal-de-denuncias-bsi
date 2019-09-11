@@ -44,12 +44,12 @@
           </thead>
           <tbody class="tableMembroAutenticado">
            <% denuncias.forEach(denuncia => { %>
-            <tr class="">
-              <td><%=  denuncia.email %></td>
-              <td class="nomeFormat">
+            <tr>
+              <td class="align-middle"><%=  denuncia.email %></td>
+              <td class="nomeFormat align-middle">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" id="formResponsavel" onchange="atualizarResponsavel(this,'<%= denuncia.id%>')">
+                    <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= denuncia.id%>')">
                       <%usuarios.forEach(usuario => { %>
                         <option> <%= usuario.nome %> </option>
                       <% }); %>
@@ -60,10 +60,10 @@
               <td>
                 <%= denuncia.datahoraSubmissao.toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
               </td>
-              <td>
+              <td class="align-middle">
                 <%= denuncia.descricao%>
               </td>
-              <td class="statusFormat">
+              <td class="statusFormat align-middle">
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" id="formStatus">
@@ -76,7 +76,7 @@
                   </div>
                 </form>
               </td>
-              <td><%= denuncia.descricao%></td>
+              <td class="align-middle"><%= denuncia.observacao || "Sem observação"%></td>
             </tr>
             <% }); %>
           </tbody>
@@ -95,7 +95,5 @@
          console.log(data);
          console.log(status);
        });
-     };
+     }
 </script>
-
-    
