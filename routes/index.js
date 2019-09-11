@@ -191,5 +191,10 @@ router.post('/admin/login', (req, res) => {
         failureFlash: 'Usuário ou senha inválidos.'
     })(req, res);
 }); // Autenticação do usuário
+router.post('/admin/responsavel', ensureAuthenticated, async(req,res)=>{
+    console.log(req.body);
+    //let denuncia = await Denuncia.findOne({_id : req.body.id});
+    //denuncia.responsavel = req.responsavel;
+}); //Atualização do responsável pela denúncia
 
 module.exports = router;
