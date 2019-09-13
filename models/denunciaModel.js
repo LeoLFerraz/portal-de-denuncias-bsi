@@ -12,7 +12,7 @@ const denunciaSchema = new mongoose.Schema(
         },
         "status": { // 0 = submetida, 1 = aprovada em revisão pela comissão, 2 = aprovada em revisão pelo NAPE, 3 = solucionada, 4 = cancelada.
             "type": Number,
-            "default": 1,
+            "default": 0,
             "required": true
         },
         "observacao": {

@@ -4,8 +4,9 @@
         <form class="row">
           <div class="col-lg-3 mb-3">
             <legend>Status:</legend>
-            <select class="custom-select" id="formStatus myInput">
-              <option selected>Submetida</option>
+            <select class="custom-select" id="formStatusmyInput" name="status">
+              <option selected value="">Todos</option>
+              <option value="0">Submetida</option>
               <option value="1">Aprovada - NAPE</option>
               <option value="2">Aprovada - Comissão</option>
               <option value="3">Solucionada</option>
@@ -15,8 +16,9 @@
 
           <div class="col-lg-3">
             <legend>Data de Submissão:</legend>
-            <select class="custom-select" id="formStatus">
-              <option selected>Hoje</option>
+            <select class="custom-select" id="formStatus" name="data">
+              <option selected value="">Todas</option>
+              <option value="0">Hoje</option>
               <option value="1">Ontem</option>
               <option value="2">Nesta Semana</option>
               <option value="3">Semana Passada</option>
@@ -25,13 +27,13 @@
           </div>
 
           <div class="col-lg-3">
-            <button type="button" class="btn btn-primary">Filtrar</button>
+            <button type="button" class="btn btn-primary" onclick="filtrar()">Filtrar</button>
           </div>
         </form>
       </div>
 
       <div>
-        <table class="table table-bordered table-responsive table-striped">
+        <table class="table table-bordered table-responsive table-striped" >
           <thead>
             <tr>
               <th>Email</th>
@@ -68,11 +70,11 @@
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= JSON.stringify(denuncia) %>')">
-                      <option disabled <% if(denuncia.status == 0){%>selected<%}%> value="0">Submetida</option>
-                      <option <% if(denuncia.status == 1){%>selected<%}%> value="1">Aprovada - Em Revisão pela Comissão</option>
-                      <option <% if(denuncia.status == 2){%>selected<%}%> value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
-                      <option <% if(denuncia.status == 3){%>selected<%}%> value="3">Solucionada</option>
-                      <option <% if(denuncia.status == 4){%>selected<%}%> value="4">Cancelada</option>
+                      <option disabled <% if(denuncia.status == 0){%> selected <%}%> value="0">Submetida</option>
+                      <option <% if(denuncia.status == 1){%> selected <%}%> value="1">Aprovada - Em Revisão pela Comissão</option>
+                      <option <% if(denuncia.status == 2){%> selected <%}%> value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
+                      <option <% if(denuncia.status == 3){%> selected <%}%> value="3">Solucionada</option>
+                      <option <% if(denuncia.status == 4){%> selected <%}%> value="4">Cancelada</option>
                     </select>
                   </div>
                 </form>
@@ -84,6 +86,8 @@
         </table>
       </div>
  </div>
+
+ <div class="teste"></div>
 
 
  <script>
@@ -104,5 +108,21 @@
              console.log(data);
              console.log(status);
          })
+     }
+
+     function filtrar(){
+       let filtros ={
+         status : $("#formStatusmyInput").val(),
+         data: $("#formStatus").val()
+       }
+       $.get("/admin/home?status="+filtros.status+"&data="+filtros.data, (data, status)=>{
+         if(status == "success"){
+           console.log(status)
+           let inicio = data.indexOf("<table")+7;
+           let fim = data.indexOf('</table>')-1;
+           let tabela = data.slice(inicio, fim);
+           $(".table").html(tabela);
+         }
+       });
      }
 </script>

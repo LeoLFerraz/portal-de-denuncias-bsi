@@ -78,7 +78,46 @@ router.get('/admin/login', forwardAuthenticated, (req, res) => {
 });
 
 router.get('/admin/home', ensureAuthenticated, (req, res) => {
-    Denuncia.find()
+    let query = {};
+    if (req.query.status){
+        query.status = req.query.status;
+    }
+    if (req.query.data){
+        let inicio = new Date();
+        inicio.setHours(0,0,0,0);
+        let fim = new Date();
+        fim.setHours(23,59,59,999);
+
+        if(req.query.data == 0) {
+            query.datahoraSubmissao = {
+                $lt: fim,
+                $gte: inicio
+            };
+        }
+        if(req.query.data == 1) {
+            query.datahoraSubmissao = {
+                $lt: fim.setDate(fim.getDate()-1),
+                $gte: inicio.setDate(inicio.getDate()-1)
+            };
+        }if(req.query.data == 2) {
+            query.datahoraSubmissao = {
+                $lt: fim,
+                $gte: inicio.setDate(inicio.getDate()-7)
+            };
+        }if(req.query.data == 3) {
+            query.datahoraSubmissao = {
+                $lt: fim.setDate(fim.getDate()-7),
+                $gte: inicio.setDate(inicio.getDate()-14)
+            };
+        }if(req.query.data == 4) {
+            query.datahoraSubmissao = {
+                $lt: fim.setDate(fim.getDate()-30),
+                $gte: inicio.setDate(inicio.getDate()-60)
+            };
+        }
+    }
+
+    Denuncia.find(query)
         .sort({
             datahoraSubmissao: -1
         })
