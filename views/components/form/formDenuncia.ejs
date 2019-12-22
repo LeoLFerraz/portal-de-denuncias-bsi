@@ -1,15 +1,17 @@
 <div>
     <form action="/" method="POST" id="formDenuncia">
         <div class="form-group formatacao-formulario">
-            <h2>FAÇA SUA RECLAMAÇÃO</h2>
+            <div class="formTitleHeader">
+                <h2>FAÇA SUA RECLAMAÇÃO</h2>
+            </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6 col-12 formLabelInputContainer">
                     <legend>Descrição da sua Reclamação:</legend>
                     <textarea class="form-control"  name="descricao" id="textDenuncia" rows="9" required ></textarea>
                 </div>
 
-                <div class="col-6 formDetalhe">
-                    <div>
+                <div class="col-md-12 col-12 formDetalhe">
+                    <div class="formLabelInputContainer">
                         <legend>
                             Visibilidade da reclamação:
                             <a href="#" data-toggle="tooltip"
@@ -30,19 +32,19 @@
                         </p>
                     </div>
 
-                    <div>
+                    <div class="formLabelInputContainer">
                         <legend>Email:</legend>
                         <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required />
                     </div>
 
-                    <div>
+                    <div class="formLabelInputContainer">
                         <input type="checkbox" name="termos" id="termosObrigatorio" required />
                         <label for="termosObrigatorio">Entendo a <a href="#" class="button-termos"
                                                                     data-toggle="modal"
-                                                                    data-target="#termosDeUso">política de conduta</a> da comissão</label> 
+                                                                    data-target="#termosDeUso">política de conduta</a> da comissão</label>
                     </div>
 
-                    <div>
+                    <div class="m-auto">
                         <button type="submit" class="btn btn-outline-primary">
                             Submeter Formulário
                         </button>
