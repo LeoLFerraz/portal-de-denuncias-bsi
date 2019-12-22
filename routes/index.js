@@ -208,11 +208,13 @@ router.post('/admin/login', (req, res) => {
 router.post('/:denunciaid', (req, res) => { // Update de denúncias. Especialmente importante para as requisições ajax do relatório administrativo.
                                             // Espera-se receber o objeto inteiro, com todos seus atributos, independente de terem mudado ou não.
     let denunciaModificada = req.body;
-    console.log(denunciaModificada);
-    console.log(denunciaModificada._id)
-    Denuncia.findByIdAndUpdate(denunciaModificada._id, denunciaModificada, (err, doc) => {
-        console.log(err);
-    });
+    Denuncia.findByIdAndUpdate(req.params.denunciaid, denunciaModificada)
+        .then(() => {
+            res.status(200).send({message: 'Denúncia atualizado com sucesso!'});
+        })
+        .catch(err => {
+            res.status(500).send({message:'Erro ao atualizar denuncia!'});
+        });
 });
 
 module.exports = router;

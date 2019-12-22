@@ -50,7 +50,7 @@
               <td class="nomeFormat align-middle">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= JSON.stringify(denuncia)%>')">
+                    <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= denuncia._id%>')">
                       <option disabled <% if(!denuncia.responsavel){%> selected <%}%>>Nenhum</option>
                       <%usuarios.forEach(usuario => { %>
                         <option <% if(usuario.nome == denuncia.responsavel){%> selected <%}%>> <%= usuario.nome %> </option>
@@ -68,7 +68,7 @@
               <td class="align-middle">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" onchange="atualizarVisibilidade(this,'<%= JSON.stringify(denuncia) %>')">
+                    <select class="custom-select statusSelect" onchange="atualizarVisibilidade(this,'<%= denuncia._id %>')">
                       <option <% if(denuncia.visibilidade == 0){%> selected <%}%> value="0">Apenas Comissão</option>
                       <option <% if(denuncia.visibilidade == 1){%> selected <%}%> value="1">Pública</option>
                     </select>
@@ -78,7 +78,7 @@
               <td class="statusFormat align-middle">
                 <form>
                   <div class="form-row">
-                    <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= JSON.stringify(denuncia) %>')">
+                    <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= denuncia._id %>')">
                       <option disabled <% if(denuncia.status == 0){%> selected <%}%> value="0">Cancelada</option>
                       <option <% if(denuncia.status == 1){%> selected <%}%> value="1">Submetida</option>
                       <option <% if(denuncia.status == 2){%> selected <%}%> value="2">Em Revisão</option>
@@ -100,22 +100,48 @@
 
 
  <script>
-     function atualizarResponsavel(selectObj, denuncia){
-       let denunciaModificada = JSON.parse(denuncia);
+     function atualizarResponsavel(selectObj, denunciaId){
+       let denunciaModificada = {};
        denunciaModificada.responsavel = selectObj.value;
-       $.post("/" + denunciaModificada.id, denunciaModificada);
+       $.post("/" + denunciaId, denunciaModificada)
+        .done(flashSuccess)
+        .fail(flashFail);
      }
 
-     function atualizarStatus(selectObj, denuncia) {
-         let denunciaModificada = JSON.parse(denuncia);
+     function atualizarStatus(selectObj, denunciaId) {
+         let denunciaModificada = {};
          denunciaModificada.status = selectObj.value;
-         $.post("/" + denunciaModificada.id, denunciaModificada);
+         $.post("/" + denunciaId, denunciaModificada)
+                 .done(flashSuccess)
+                 .fail(flashFail);
      }
 
-     function atualizarVisibilidade(selectObj, denuncia) {
-         let denunciaModificada = JSON.parse(denuncia);
+     function atualizarVisibilidade(selectObj, denunciaId) {
+         let denunciaModificada = {};
          denunciaModificada.visibilidade = selectObj.value;
-         $.post("/" + denunciaModificada.id, denunciaModificada);
+         $.post("/" + denunciaId, denunciaModificada)
+                 .done(flashSuccess)
+                 .fail(flashFail);
+     }
+
+     function flashSuccess(data){
+       message = "<div class='alert alert-success alert-dismissible fade show'>"+
+               data.message+
+               "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+               "<span aria-hidden='true'>&times;</span>"+
+               "</button>"+
+               "</div>";
+       $("#flashMsgContainer").append(message);
+       }
+
+       function flashFail(data){
+       message = "<div class='alert alert-danger alert-dismissible fade show'>"+
+               data.responseJSON.message+
+               "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+               "<span aria-hidden='true'>&times;</span>"+
+               "</button>"+
+               "</div>";
+       $("#flashMsgContainer").append(message);
      }
 
      function filtrar(){
