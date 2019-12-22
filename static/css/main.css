@@ -166,3 +166,11 @@ textarea{
     width: 60%;
     margin: 44.5px 0px;
 }
+
+.formLabelInputContainer {
+    margin-bottom: 20px;
+}
+
+.formLabelInputContainer label {
+    margin-bottom: 0;
+}

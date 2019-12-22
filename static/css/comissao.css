@@ -39,7 +39,7 @@ margin-top: 20px;
 
 .campo-statusMembro i{
     color: rgb(233, 49, 49);
- } 
+ }
 
 .campo-statusMembro{
     display: flex;
@@ -63,7 +63,7 @@ margin-top: 20px;
 }
 
 .table td{
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .card-body{
