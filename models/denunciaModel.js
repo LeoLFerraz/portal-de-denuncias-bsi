@@ -19,7 +19,7 @@ const denunciaSchema = new mongoose.Schema(
             "type": String,
             "required": false
         },
-        "visibilidade": {
+        "visibilidade": { // 0 = apenas comissão, 1 = pública
             "type": Number,
             "required": true
         },

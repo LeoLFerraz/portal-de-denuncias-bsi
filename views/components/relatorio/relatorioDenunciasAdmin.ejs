@@ -5,12 +5,12 @@
           <div class="col-lg-3 mb-3">
             <legend>Status:</legend>
             <select class="custom-select" id="formStatusmyInput" name="status">
-              <option selected value="">Todos</option>
-              <option value="0">Submetida</option>
-              <option value="1">Aprovada - NAPE</option>
-              <option value="2">Aprovada - Comissão</option>
-              <option value="3">Solucionada</option>
-              <option value="4">Cancelada</option>
+              <option selected value="">Todas</option>
+              <option value="0">Cancelada</option>
+              <option value="1">Submetida</option>
+              <option value="2">Em Revisão</option>
+              <option value="3">Aprovada</option>
+              <option value="4">Solucionada</option>
             </select>
           </div>
 
@@ -39,7 +39,8 @@
               <th>Email</th>
               <th>Responsável</th>
               <th>Data</th>
-              <th>Reclamação</th>
+              <th>Descrição</th>
+              <th>Visibilidade</th>
               <th>Status</th>
               <th>Observação</th>
             </tr>
@@ -66,15 +67,25 @@
               <td class="align-middle">
                 <%= denuncia.descricao%>
               </td>
+              <td class="align-middle">
+                <form>
+                  <div class="form-row">
+                    <select class="custom-select statusSelect" onchange="atualizarVisibilidade(this,'<%= JSON.stringify(denuncia) %>')">
+                      <option <% if(denuncia.visibilidade == 0){%> selected <%}%> value="0">Apenas Comissão</option>
+                      <option <% if(denuncia.visibilidade == 1){%> selected <%}%> value="1">Pública</option>
+                    </select>
+                  </div>
+                </form>
+              </td>
               <td class="statusFormat align-middle">
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= JSON.stringify(denuncia) %>')">
-                      <option disabled <% if(denuncia.status == 0){%> selected <%}%> value="0">Submetida</option>
-                      <option <% if(denuncia.status == 1){%> selected <%}%> value="1">Aprovada - Em Revisão pela Comissão</option>
-                      <option <% if(denuncia.status == 2){%> selected <%}%> value="2">Aprovada - Em Revisão pelo NAPE/Corpo Docente</option>
-                      <option <% if(denuncia.status == 3){%> selected <%}%> value="3">Solucionada</option>
-                      <option <% if(denuncia.status == 4){%> selected <%}%> value="4">Cancelada</option>
+                      <option disabled <% if(denuncia.status == 0){%> selected <%}%> value="0">Cancelada</option>
+                      <option <% if(denuncia.status == 1){%> selected <%}%> value="1">Submetida</option>
+                      <option <% if(denuncia.status == 2){%> selected <%}%> value="2">Em Revisão</option>
+                      <option <% if(denuncia.status == 3){%> selected <%}%> value="3">Aprovada</option>
+                      <option <% if(denuncia.status == 4){%> selected <%}%> value="4">Solucionada</option>
                     </select>
                   </div>
                 </form>
@@ -94,20 +105,19 @@
      function atualizarResponsavel(selectObj, denuncia){
        let denunciaModificada = JSON.parse(denuncia);
        denunciaModificada.responsavel = selectObj.value;
-       $.post("/" + denunciaModificada.id, denunciaModificada, (data, status) => {
-         console.log(data);
-         console.log(status);
-       })
+       $.post("/" + denunciaModificada.id, denunciaModificada);
      }
 
      function atualizarStatus(selectObj, denuncia) {
          let denunciaModificada = JSON.parse(denuncia);
          denunciaModificada.status = selectObj.value;
-         console.log(denunciaModificada);
-         $.post("/" + denunciaModificada.id, denunciaModificada, (data, status) => {
-             console.log(data);
-             console.log(status);
-         })
+         $.post("/" + denunciaModificada.id, denunciaModificada);
+     }
+
+     function atualizarVisibilidade(selectObj, denuncia) {
+         let denunciaModificada = JSON.parse(denuncia);
+         denunciaModificada.visibilidade = selectObj.value;
+         $.post("/" + denunciaModificada.id, denunciaModificada);
      }
 
      function filtrar(){
