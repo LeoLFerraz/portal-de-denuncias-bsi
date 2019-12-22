@@ -62,7 +62,7 @@
                 </form>
               </td>
               <td>
-                <%= denuncia.datahoraSubmissao.toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
+                <%= denuncia.datahoraSubmissao.toLocaleString() %>
               </td>
               <td class="align-middle">
                 <%= denuncia.descricao%>

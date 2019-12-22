@@ -11,7 +11,7 @@
      <% denuncias.forEach(denuncia => { %>
     <tr>
        <td><%= denuncia.responsavel || "Sem responsável" %></td>
-       <td><%= denuncia.datahoraSubmissao.toISOString().replace(/T/, ' ').replace(/\..+/, '') %></td>
+       <td><%= denuncia.datahoraSubmissao.toLocaleString() %> </td>
         <td class="tdDenuncia align-middle">
             <%= denuncia.descricao%>
         </td>

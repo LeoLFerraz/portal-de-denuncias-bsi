@@ -26,7 +26,7 @@ const denunciaSchema = new mongoose.Schema(
         "datahoraSubmissao": {
             "type": Date,
             "required": true,
-            "default": Date.now()
+            "default": new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"})
         },
         "responsavel": {
             "type": String,

@@ -139,8 +139,9 @@ router.get('/admin/logout', ensureAuthenticated, (req, res) => {
 // POST routes:
 router.post('/', (req, res) => {
     let {descricao, visibilidade, email} = req.body;
-    let datahoraSubmissao = new Date(); // Na view, forçamos o formato da data com o comando
+    let datahoraSubmissao = new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}); // Na view, forçamos o formato da data com o comando
                                         // ".toISOString().replace(/T/, ' ').replace(/\..+/, '')."
+    console.log(datahoraSubmissao);
     let novaDenuncia = new Denuncia({
         descricao,
         visibilidade,
