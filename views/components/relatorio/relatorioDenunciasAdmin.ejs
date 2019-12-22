@@ -33,7 +33,7 @@
       </div>
 
       <div>
-        <table class="table table-bordered table-responsive table-striped" >
+        <table class="table table-bordered table-responsive table-striped" id="tabelaDenuncias">
           <thead>
             <tr>
               <th>Email</th>
@@ -117,11 +117,8 @@
        }
        $.get("/admin/home?status="+filtros.status+"&data="+filtros.data, (data, status)=>{
          if(status == "success"){
-           console.log(status)
-           let inicio = data.indexOf("<table")+7;
-           let fim = data.indexOf('</table>')-1;
-           let tabela = data.slice(inicio, fim);
-           $(".table").html(tabela);
+           let tabela = $(data).find('#tabelaDenuncias').html();
+           $("#tabelaDenuncias").html(tabela);
          }
        });
      }
