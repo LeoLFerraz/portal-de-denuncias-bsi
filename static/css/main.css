@@ -174,3 +174,156 @@ textarea{
 .formLabelInputContainer label {
     margin-bottom: 0;
 }
+
+.conteudo-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.conteudo-style span{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.fotoPerfilComissao {
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+    margin: auto auto;
+}
+
+.espacoTabela{
+    width:10%;
+}
+.espacoDenuncia{
+    width:50%;
+
+}
+.espacoObservacao{
+    width: 25%;
+}
+
+.table{
+    text-align: center;
+    border: 2px solid #00ace6;
+}
+
+table{
+    background-color: rgb(21, 192, 30);
+}
+
+table span{
+    padding: 10px;
+    color:#fff;
+    border-radius: 0px 10px;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.table .tdDenuncia{
+    padding: 10px 30px;
+}
+
+.formatacao-formulario img{
+    width: 250px;
+    height: 230px;
+    margin-bottom: 10px;
+}
+
+.btnfoto{
+    margin-top: 20px;
+}
+
+.filtragem{
+    margin: 20px 0px;
+}
+
+.filtragem span{
+    font-size:20px;
+    font-weight: 700;
+}
+
+.filtragem legend{
+    font-size: 16px;
+}
+
+.filtragem button{
+    margin-top:30px;
+}
+
+.statusFormat{
+    width: 150px;
+}
+
+.nomeFormat{
+    width: 200px;
+}
+
+.tableMembroAutenticado button{
+    margin:15px;
+}
+
+.campo-statusMembro i{
+    color: rgb(233, 49, 49);
+}
+
+.campo-statusMembro{
+    display: flex;
+    justify-content: space-between;
+}
+
+.telaMembros{
+    display: flex;
+    justify-content: center;
+}
+
+.telaMembros span{
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.card{
+    width: 25%;
+    margin: 15px;;
+}
+
+.table td{
+    vertical-align: middle;
+}
+
+.card-body{
+    background-color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        padding: 5px;
+        margin: 0 0 10px 0;
+    }
+
+    #sobrePortal {
+        display: none;
+    }
+
+    header h1 {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    label {
+        display: inline;
+    }
+
+    .formatacao-formulario {
+        padding: 10px;
+    }
+
+}
