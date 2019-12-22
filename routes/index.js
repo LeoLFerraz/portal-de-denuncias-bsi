@@ -82,41 +82,15 @@ router.get('/admin/home', ensureAuthenticated, (req, res) => {
     if (req.query.status){
         query.status = req.query.status;
     }
-    if (req.query.data){
-        let inicio = new Date();
-        inicio.setHours(0,0,0,0);
-        let fim = new Date();
-        fim.setHours(23,59,59,999);
-
-        if(req.query.data == 0) {
-            query.datahoraSubmissao = {
-                $lt: fim,
-                $gte: inicio
-            };
-        }
-        if(req.query.data == 1) {
-            query.datahoraSubmissao = {
-                $lt: fim.setDate(fim.getDate()-1),
-                $gte: inicio.setDate(inicio.getDate()-1)
-            };
-        }if(req.query.data == 2) {
-            query.datahoraSubmissao = {
-                $lt: fim,
-                $gte: inicio.setDate(inicio.getDate()-7)
-            };
-        }if(req.query.data == 3) {
-            query.datahoraSubmissao = {
-                $lt: fim.setDate(fim.getDate()-7),
-                $gte: inicio.setDate(inicio.getDate()-14)
-            };
-        }if(req.query.data == 4) {
-            query.datahoraSubmissao = {
-                $lt: fim.setDate(fim.getDate()-30),
-                $gte: inicio.setDate(inicio.getDate()-60)
-            };
-        }
+    if (req.query.dataInicio || req.query.dataFim) {
+        query.datahoraSubmissao={};
     }
-
+    if (req.query.dataInicio) {
+        query.datahoraSubmissao.$gte = req.query.dataInicio+"T00:00:00Z";
+    }
+    if (req.query.dataFim) {
+        query.datahoraSubmissao.$lt = req.query.dataFim+"T23:59:59.999Z";
+    }
     Denuncia.find(query)
         .sort({
             datahoraSubmissao: -1

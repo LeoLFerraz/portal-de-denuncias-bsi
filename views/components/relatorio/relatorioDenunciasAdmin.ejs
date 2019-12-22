@@ -4,7 +4,7 @@
         <form class="row">
           <div class="col-lg-3 mb-3">
             <legend>Status:</legend>
-            <select class="custom-select" id="formStatusmyInput" name="status">
+            <select class="custom-select" id="Status" name="status">
               <option selected value="">Todos</option>
               <option value="0">Submetida</option>
               <option value="1">Aprovada - NAPE</option>
@@ -15,15 +15,13 @@
           </div>
 
           <div class="col-lg-3">
-            <legend>Data de Submissão:</legend>
-            <select class="custom-select" id="formStatus" name="data">
-              <option selected value="">Todas</option>
-              <option value="0">Hoje</option>
-              <option value="1">Ontem</option>
-              <option value="2">Nesta Semana</option>
-              <option value="3">Semana Passada</option>
-              <option value="4">Mês passado</option>
-            </select>
+            <legend>Inicio:</legend>
+            <input class="custom-select" type="date" name="dataInicio" id="DataInicio">
+          </div>
+
+          <div class="col-lg-3">
+            <legend>Fim:</legend>
+            <input class="custom-select" type="date" name="dataFim" id="DataFim">
           </div>
 
           <div class="col-lg-3">
@@ -112,10 +110,11 @@
 
      function filtrar(){
        let filtros ={
-         status : $("#formStatusmyInput").val(),
-         data: $("#formStatus").val()
+         status : $("#Status").val(),
+         dataInicio: $("#DataInicio").val(),
+         dataFim: $("#DataFim").val()
        }
-       $.get("/admin/home?status="+filtros.status+"&data="+filtros.data, (data, status)=>{
+       $.get("/admin/home?status="+filtros.status+"&dataInicio="+filtros.dataInicio+"&dataFim="+filtros.dataFim, (data, status)=>{
          if(status == "success"){
            let tabela = $(data).find('#tabelaDenuncias').html();
            $("#tabelaDenuncias").html(tabela);
