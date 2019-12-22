@@ -19,14 +19,14 @@ const denunciaSchema = new mongoose.Schema(
             "type": String,
             "required": false
         },
-        "visibilidade": {
+        "visibilidade": { // 0 = apenas comissão, 1 = pública
             "type": Number,
             "required": true
         },
         "datahoraSubmissao": {
             "type": Date,
             "required": true,
-            "default": Date.now()
+            "default": new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"})
         },
         "responsavel": {
             "type": String,
