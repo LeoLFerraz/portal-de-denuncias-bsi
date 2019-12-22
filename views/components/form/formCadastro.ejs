@@ -5,8 +5,7 @@
                 <h2>Cadastro de Novos Membros</h2>
                 <div class="row">
                     <div class="col-9 formDetalhe">
-
-                        <div>
+                        <div class="formLabelInputContainer">
                             <label for="nameMembroAdd">Nome</label>
                             <input
                                     type="text"
@@ -15,8 +14,7 @@
                                     placeholder="Nome Completo"
                                     name="nome">
                         </div>
-
-                        <div>
+                        <div class="formLabelInputContainer">
                             <label for="emailMembroAdd">Endereço de E-mail:</label>
                             <input
                                     type="email"
@@ -26,7 +24,7 @@
                                     name="email">
                         </div>
 
-                        <div>
+                        <div class="formLabelInputContainer">
                             <label for="senha">Senha:</label>
                             <input
                                     type="password"
@@ -36,18 +34,18 @@
                                     name="senha">
                         </div>
 
-                        <div>
+                        <div class="formLabelInputContainer">
                             <label for="dataAniversario">Data de Nascimento:</label>
                             <input type="date" class="form-control" name="dataAniversario" id="dataAniversario">
                         </div>
 
-                        <div>
+                        <div class="formLabelInputContainer">
                             <label for="observacaoPublica">Observação:</label>
                             <textarea class="form-control" name="observacaoPublica" id="observacaoPublica">
                               </textarea>
                         </div>
 
-                        <div>
+                        <div class="formLabelInputContainer">
                             <button class="btn btn-primary mt-2" type="submit" id="submit">
                                 <span class="btncadastrar">Cadastrar</span>
                             </button>
@@ -88,7 +86,7 @@
             document.getElementById("submit").disabled = true;
         }
         else {
-            document.getElementById("flashMsgContainer").innerHTML = ""
+            document.getElementById("flashMsgContainer").innerHTML = "";
             document.getElementById("submit").disabled = false;
             document.getElementById("previewImage").src = URL.createObjectURL(evt.target.files[0]);
             document.getElementById("avatarLabel").innerHTML = evt.target.files[0].name;
