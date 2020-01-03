@@ -3,31 +3,58 @@
     <div class="container">
         <div class="header-display">
             <h1>Portal de Mediação de Conflitos BSI</h1>
-        </div> 
+        </div>
     </div>
-    <nav>
-        <div class="container">
-            <a href="/">Inicio</a>
-            <a href="/comissao">Comissão</a>
-            <a href="/admin/login">Login</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="bg-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comissao">Comissão</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/login">Login</a>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>
 <%} else {%>
 <header>
     <div class="container">
-        <div class="header-display">
+        <div class="">
             <h1>Portal de Mediação de Conflitos BSI</h1>
         </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navButton navbar-toggler float-left" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                Menu
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/comissao">Comissão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/home">Relatório Administrativo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/cadastrousuario">Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/logout">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    <nav>
-        <div class="container">
-            <a href="/">Inicio</a>
-            <a href="/comissao">Comissão</a>
-            <a href="/admin/cadastrousuario">Cadastrar</a>
-            <a href="/admin/home">Relatorio</a>
-            <a href="/admin/logout">Sair</a>
-        </div>
-    </nav>
 </header>
 <%}%>

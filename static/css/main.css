@@ -6,6 +6,10 @@ a:hover{
     text-decoration: none;
 }
 
+.navbar {
+    color: white !important;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -43,7 +47,6 @@ header a:hover{
 }
 
 header nav{
-    background-color: rgb(34, 34, 34);
     padding: 10px;
 }
 
@@ -300,8 +303,12 @@ table span{
 
 @media only screen and (max-width: 768px) {
     header {
-        padding: 5px;
+        padding: 20px 0 0 0;
         margin: 0 0 10px 0;
+    }
+
+    header .container {
+        padding: 0 8px;
     }
 
     #sobrePortal {
@@ -311,6 +318,7 @@ table span{
     header h1 {
         text-align: center;
         font-size: 2rem;
+        margin: 0;
     }
 
     h2 {
@@ -324,6 +332,17 @@ table span{
 
     .formatacao-formulario {
         padding: 10px;
+    }
+
+    header nav {
+        background-color: transparent;
+    }
+
+    .navButton {
+        color: white;
+        outline: transparent;
+        font-size: 1rem;
+        padding: 1px;
     }
 
 }
