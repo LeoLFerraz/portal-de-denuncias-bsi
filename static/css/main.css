@@ -22,7 +22,7 @@ body{
 
 /*SECTION Header*/
 header{
-    background-color: #2A2B2E;
+    background-color: #5c6882;
     padding-top: 30px;
     margin-bottom:20px;
 }
@@ -88,7 +88,7 @@ footer{
 }
 
 .formatacao-formulario{
-    border:2px solid #dee3e4;
+    border:2px solid rgba(147, 160, 193, 0.44);
     border-radius: 5px;
     padding: 20px;
 }
