@@ -1,4 +1,28 @@
  <div class="container">
+   <div class="modal fade" id="editarObservacao" tabindex="-1" role="dialog" aria-labelledby="editarObservacao" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="editarObservacao">Insira a observação</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <form>
+             <div class="form-group">
+               <input type="hidden" id="idObservacao" value="">
+               <label for="message-text" class="col-form-label">Observação:</label>
+               <textarea class="form-control" id="textAreaObservacao"></textarea>
+             </div>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-primary" onclick="atualizarObservacao()" data-dismiss="modal">Enviar</button>
+         </div>
+       </div>
+     </div>
+   </div>
       <div class="filtragem">
         <div><span>Filtrar Relatório</span></div>
         <form class="row">
@@ -88,7 +112,10 @@
                   </div>
                 </form>
               </td>
-              <td class="align-middle"><%= denuncia.observacao || "Sem observação"%></td>
+              <td class="align-middle">
+                <%= denuncia.observacao || "Sem observação"%>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarObservacao" onclick="inserirIdObservacao('<%= denuncia._id%>')"><i class="fas fa-pencil-alt"></i></button>
+              </td>
             </tr>
             <% }); %>
           </tbody>
@@ -123,7 +150,14 @@
                  .done(flashSuccess)
                  .fail(flashFail);
      }
-
+     function atualizarObservacao() {
+       let denunciaModificada = {};
+       denunciaModificada.observacao = $('#textAreaObservacao').val();
+       let denunciaId = $("#idObservacao").val();
+       $.post("/" + denunciaId, denunciaModificada)
+               .done(flashSuccess)
+               .fail(flashFail);
+     }
      function flashSuccess(data){
        message = "<div class='alert alert-success alert-dismissible fade show'>"+
                data.message+
@@ -157,4 +191,7 @@
          }
        });
      }
-</script>
+     function inserirIdObservacao(id){
+         $("#idObservacao").val(id);
+     }
+ </script>
