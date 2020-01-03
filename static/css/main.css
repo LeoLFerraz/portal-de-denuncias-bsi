@@ -10,6 +10,23 @@ a:hover{
     color: white !important;
 }
 
+.dnone-sm-up {
+    display: none;
+}
+
+.tdDenuncia {
+    word-break: break-word;
+}
+
+.denunciaCard {
+    width: 100% !important;
+    margin: 10px 0 !important;
+}
+
+.denunciaCardHeader {
+    font-size: 1rem;
+}
+
 .navbar {
     padding: 0 0 5px 0;
 }
@@ -355,6 +372,14 @@ table span{
         align-content: center;
         align-items: center;
         justify-content: center;
+    }
+
+    .dnone-sm-down {
+        display: none;
+    }
+
+    .dnone-sm-up {
+        display: initial;
     }
 
 }
