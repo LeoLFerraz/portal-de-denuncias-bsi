@@ -60,8 +60,12 @@ router.get('/comissao', (req, res) => {
 });
 
 // Tela de admin para administração de usuários.
-router.get('/admin/usuarios',(req, res) => {
-    res.render('../views/usuarios.ejs', {req});
+router.get('/admin/usuarios', ensureAuthenticated,(req, res) => {
+    let membros;
+    Usuario.find().then( usuarios =>{
+        membros = usuarios;
+        res.render('../views/usuarios.ejs', {membros, req});
+    }).catch(err => console.log(err));;
 } );
 
 // Tela de admin
@@ -206,7 +210,7 @@ router.post('/admin/login', (req, res) => {
 }); // Autenticação do usuário.
 
 router.post('/:denunciaid', (req, res) => { // Update de denúncias. Especialmente importante para as requisições ajax do relatório administrativo.
-                                            // Espera-se receber o objeto inteiro, com todos seus atributos, independente de terem mudado ou não.
+
     let denunciaModificada = req.body;
     Denuncia.findByIdAndUpdate(req.params.denunciaid, denunciaModificada)
         .then(() => {
@@ -214,6 +218,26 @@ router.post('/:denunciaid', (req, res) => { // Update de denúncias. Especialmen
         })
         .catch(err => {
             res.status(500).send({message:'Erro ao atualizar denuncia!'});
+        });
+});
+
+router.post('/desativarUsuario/:usuarioid', (req, res) => {
+    Usuario.findByIdAndUpdate(req.params.usuarioid, {status : 0})
+        .then(() => {
+            res.status(200).send({message: 'Usuário desativado com sucesso!'});
+        })
+        .catch(err => {
+            res.status(500).send({message:'Erro ao desativar usuário!'});
+        });
+});
+
+router.post('/ativarUsuario/:usuarioid', (req, res) => {
+    Usuario.findByIdAndUpdate(req.params.usuarioid, {status : 1})
+        .then(() => {
+            res.status(200).send({message: 'Usuário ativado com sucesso!'});
+        })
+        .catch(err => {
+            res.status(500).send({message:'Erro ao ativar usuário!'});
         });
 });
 

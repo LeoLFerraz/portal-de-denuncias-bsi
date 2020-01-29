@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
     <head>
         <% include components/projectDefaultHead/projectDefaultHead %>
     </head>
@@ -25,7 +24,11 @@
       <td><%= membro.nome %></td>
       <td><%= membro.email %></td>
       <td><%= membro.status %></td>
-      <td><button type="button" class="btn btn-danger">Deletar</button></td>
+        <% if(membro.status == 1) {%>
+            <td><button type="button" class="btn btn-danger" onclick="desativarUsuario('<%= membro.id%>')">Desativar</button></td>
+        <%} else {%>
+            <td><button type="button" class="btn btn-success" onclick="ativarUsuario('<%= membro.id%>')">Ativar</button></td>
+        <%}%>
     </tr>
   </tbody>
   <% }); %>
@@ -36,4 +39,11 @@
 
         <% include components/projectDefaultScripts/projectDefaultScripts %>
     </body>
-</html>
+<script>
+    function ativarUsuario(usuarioId) {
+        $.post("/ativarUsuario/" + usuarioId);
+    }
+    function desativarUsuario(usuarioId) {
+        $.post("/desativarUsuario/" + usuarioId);
+    }
+</script>
