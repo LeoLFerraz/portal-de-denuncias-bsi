@@ -103,7 +103,7 @@
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" onchange="atualizarStatus(this,'<%= denuncia._id %>')">
-                      <option disabled <% if(denuncia.status == 0){%> selected <%}%> value="0">Cancelada</option>
+                      <option <% if(denuncia.status == 0){%> selected <%}%> value="0">Cancelada</option>
                       <option <% if(denuncia.status == 1){%> selected <%}%> value="1">Submetida</option>
                       <option <% if(denuncia.status == 2){%> selected <%}%> value="2">Em Revisão</option>
                       <option <% if(denuncia.status == 3){%> selected <%}%> value="3">Aprovada</option>

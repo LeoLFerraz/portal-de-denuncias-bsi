@@ -210,7 +210,7 @@ router.post('/:denunciaid', (req, res) => { // Update de denúncias. Especialmen
     let denunciaModificada = req.body;
     Denuncia.findByIdAndUpdate(req.params.denunciaid, denunciaModificada)
         .then(() => {
-            res.status(200).send({message: 'Denúncia atualizado com sucesso!'});
+            res.status(200).send({message: 'Denúncia atualizada com sucesso!'});
         })
         .catch(err => {
             res.status(500).send({message:'Erro ao atualizar denuncia!'});
