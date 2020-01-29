@@ -278,20 +278,12 @@ table span{
     font-size: 16px;
 }
 
-.filtragem button{
-    margin-top:30px;
-}
-
-.statusFormat{
-    width: 150px;
-}
-
-.nomeFormat{
-    width: 200px;
+.filtragem button {
+    margin-top: 30px;
 }
 
 .tableMembroAutenticado button{
-    margin:15px;
+    margin: 15px;
 }
 
 .campo-statusMembro i{
@@ -325,6 +317,19 @@ table span{
 
 .card-body{
     background-color: white;
+}
+
+#tabelaDenunciasAdmin {
+    font-size: 12px;
+}
+
+#tabelaDenunciasAdmin tbody tr .tabelaDenunciasAdminDesc {
+    max-width: 400px !important;
+    overflow: auto;
+}
+
+.statusSelect {
+    max-width: 85px;
 }
 
 @media only screen and (max-width: 768px) {

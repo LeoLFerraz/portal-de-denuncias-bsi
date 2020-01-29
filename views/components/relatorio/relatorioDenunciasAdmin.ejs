@@ -31,7 +31,7 @@
       </div>
 
       <div>
-        <table class="table table-bordered table-responsive table-striped" id="tabelaDenuncias">
+        <table class="table table-bordered table-responsive table-striped" id="tabelaDenunciasAdmin">
           <thead>
             <tr>
               <th>Email</th>
@@ -43,7 +43,7 @@
               <th>Observação</th>
             </tr>
           </thead>
-          <tbody class="tableMembroAutenticado">
+          <tbody>
            <% denuncias.forEach(denuncia => { %>
             <tr>
               <td class="align-middle"><%=  denuncia.email %></td>
@@ -62,7 +62,7 @@
               <td>
                 <%= denuncia.datahoraSubmissao.toLocaleString() %>
               </td>
-              <td class="align-middle">
+              <td class="align-middle tabelaDenunciasAdminDesc">
                 <%= denuncia.descricao%>
               </td>
               <td class="align-middle">
