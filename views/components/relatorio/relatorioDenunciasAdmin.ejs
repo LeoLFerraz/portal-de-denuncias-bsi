@@ -75,7 +75,7 @@
                 <form>
                   <div class="form-row">
                     <select class="custom-select statusSelect" onchange="atualizarResponsavel(this,'<%= denuncia._id%>')">
-                      <option disabled <% if(!denuncia.responsavel){%> selected <%}%>>Nenhum</option>
+                      <option>Nenhum</option>
                       <%usuarios.forEach(usuario => { %>
                         <option <% if(usuario.nome == denuncia.responsavel){%> selected <%}%>> <%= usuario.nome %> </option>
                       <% }); %>
