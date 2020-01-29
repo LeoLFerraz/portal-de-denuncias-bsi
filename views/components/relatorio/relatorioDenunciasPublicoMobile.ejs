@@ -7,7 +7,6 @@
     }%>
     <% let denunciaFullString = denuncia.descricao;%>
     <% let denunciaShortHandle = denuncia.datahoraSubmissao.toLocaleString() + ' - ' + denunciaShortString;%>
-    <% function showFullDenuncia() { document.getElementById('descricaoSpan').innerText = denunciaFullString; } %>
     <div class="card denunciaCard">
         <h5 class="card-header denunciaCardHeader">
             <a class="collapsed d-block" data-toggle="collapse" href="#<%= denuncia._id%>" aria-expanded="true" aria-controls="collapse-collapsed" id="<%= denuncia._id%>Collapser">

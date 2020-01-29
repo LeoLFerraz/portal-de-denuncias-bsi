@@ -23,6 +23,11 @@ a:hover{
     margin: 10px 0 !important;
 }
 
+.denunciaCard h5 a {
+    text-decoration: none;
+    color: black;
+}
+
 .denunciaCardHeader {
     font-size: 1rem;
 }
@@ -211,7 +216,7 @@ textarea{
 
 .fotoPerfilComissao {
     object-fit: cover;
-    height: 250px;
+    max-height: 250px;
     width: 100%;
     margin: auto auto;
 }
@@ -311,7 +316,7 @@ table span{
 
 .card{
     width: 25%;
-    margin: 15px;;
+    margin: 15px;
 }
 
 .table td{
