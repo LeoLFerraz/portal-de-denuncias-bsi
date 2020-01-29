@@ -113,7 +113,9 @@
                 </form>
               </td>
               <td class="align-middle">
-                <%= denuncia.observacao || "Sem observação"%>
+                  <div id='<%= "observacao"+denuncia._id%>'>
+                    <%= denuncia.observacao || "Sem observação"%>
+                  </div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarObservacao" onclick="inserirIdObservacao('<%= denuncia._id%>')"><i class="fas fa-pencil-alt"></i></button>
               </td>
             </tr>
@@ -155,7 +157,10 @@
        denunciaModificada.observacao = $('#textAreaObservacao').val();
        let denunciaId = $("#idObservacao").val();
        $.post("/" + denunciaId, denunciaModificada)
-               .done(flashSuccess)
+               .done((data) => {
+                 flashSuccess(data);
+                 $("#observacao"+denunciaId).text(denunciaModificada.observacao);
+               })
                .fail(flashFail);
      }
      function flashSuccess(data){
