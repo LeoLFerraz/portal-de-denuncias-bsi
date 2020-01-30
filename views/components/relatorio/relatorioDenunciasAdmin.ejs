@@ -152,8 +152,12 @@
        }
        $.get("/admin/home?status="+filtros.status+"&dataInicio="+filtros.dataInicio+"&dataFim="+filtros.dataFim, (data, status)=>{
          if(status == "success"){
-           let tabela = $(data).find('#tabelaDenuncias').html();
-           $("#tabelaDenuncias").html(tabela);
+             console.log("Filtrando tabela:");
+             let tabela = $(data).find('#tabelaDenunciasAdmin').html();
+             $("#tabelaDenunciasAdmin").html(tabela);
+         }
+         else {
+             console.log("erro filtrando tabela admin");
          }
        });
      }
