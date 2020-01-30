@@ -7,7 +7,13 @@
     <% include components/header/projectDefaultHeader %>
     <main>
         <% include components/flashMsg/messages.ejs %>
-        <% include components/relatorio/relatorioDenunciasAdmin%>
+        <div class="dnone-sm-up">
+            <% include components/relatorio/relatorioDenunciasAdminMobile.ejs %>
+        </div>
+
+        <div class="dnone-sm-down">
+            <% include components/relatorio/relatorioDenunciasAdmin.ejs %>
+        </div>
     </main>
         <% include components/footer/projectDefaultFooter %>
 

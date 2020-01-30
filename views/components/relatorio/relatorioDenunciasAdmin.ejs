@@ -55,7 +55,7 @@
       </div>
 
       <div>
-        <table class="table table-bordered table-responsive table-striped" id="tabelaDenuncias">
+        <table class="table table-bordered table-responsive table-striped" id="tabelaDenunciasAdmin">
           <thead>
             <tr>
               <th>Email</th>
@@ -67,7 +67,7 @@
               <th>Observação</th>
             </tr>
           </thead>
-          <tbody class="tableMembroAutenticado">
+          <tbody>
            <% denuncias.forEach(denuncia => { %>
             <tr>
               <td class="align-middle"><%=  denuncia.email %></td>
@@ -86,7 +86,7 @@
               <td>
                 <%= denuncia.datahoraSubmissao.toLocaleString() %>
               </td>
-              <td class="align-middle">
+              <td class="align-middle tabelaDenunciasAdminDesc">
                 <%= denuncia.descricao%>
               </td>
               <td class="align-middle">
@@ -191,8 +191,12 @@
        }
        $.get("/admin/home?status="+filtros.status+"&dataInicio="+filtros.dataInicio+"&dataFim="+filtros.dataFim, (data, status)=>{
          if(status == "success"){
-           let tabela = $(data).find('#tabelaDenuncias').html();
-           $("#tabelaDenuncias").html(tabela);
+             console.log("Filtrando tabela:");
+             let tabela = $(data).find('#tabelaDenunciasAdmin').html();
+             $("#tabelaDenunciasAdmin").html(tabela);
+         }
+         else {
+             console.log("erro filtrando tabela admin");
          }
        });
      }

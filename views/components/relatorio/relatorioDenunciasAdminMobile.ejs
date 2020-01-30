@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="filtragem">
+        <div><span>Filtrar Relatório</span></div>
+        <form class="row">
+            <div class="col-lg-3 mb-3">
+                <legend>Status:</legend>
+                <select class="custom-select" id="Status" name="status">
+                    <option selected value="">Todas</option>
+                    <option value="0">Cancelada</option>
+                    <option value="1">Submetida</option>
+                    <option value="2">Em Revisão</option>
+                    <option value="3">Aprovada</option>
+                    <option value="4">Solucionada</option>
+                </select>
+            </div>
+
+            <div class="col-lg-3">
+                <legend>Inicio:</legend>
+                <input class="custom-select" type="date" name="dataInicio" id="DataInicio">
+            </div>
+
+            <div class="col-lg-3">
+                <legend>Fim:</legend>
+                <input class="custom-select" type="date" name="dataFim" id="DataFim">
+            </div>
+
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-primary" onclick="filtrar()">Filtrar</button>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <% denuncias.forEach(denuncia => { %>
+            <% let denunciaShortString = ""; %>
+            <% if(denuncia.descricao.substr(71, 72)) {
+                denunciaShortString = denuncia.descricao.substr(0, 70) + "...";
+            } else {
+                denunciaShortString = denuncia.descricao.substr(0, 70);
+            }%>
+            <% let denunciaFullString = denuncia.descricao;%>
+            <% let denunciaShortHandle = denuncia.datahoraSubmissao.toLocaleString() + ' - ' + denunciaShortString;%>
+            <div class="card denunciaCard">
+                <h5 class="card-header denunciaCardHeader">
+                    <a class="collapsed d-block" data-toggle="collapse" href="#<%= denuncia._id%>" aria-expanded="true" aria-controls="collapse-collapsed" id="<%= denuncia._id%>Collapser">
+                        <i class="fa fa-chevron-down pull-right"></i>
+                        <%= denunciaShortHandle %>
+                    </a>
+                </h5>
+                <div id="<%= denuncia._id%>" class="collapse" aria-labelledby="heading-collapsed">
+                    <div class="card-body">
+                        <%= denunciaFullString %>
+                    </div>
+                </div>
+            </div>
+        <%});%>
+    </div>
+</div>
+
+<script>
+    function atualizarResponsavel(selectObj, denunciaId){
+        let denunciaModificada = {};
+        denunciaModificada.responsavel = selectObj.value;
+        $.post("/" + denunciaId, denunciaModificada)
+            .done(flashSuccess)
+            .fail(flashFail);
+    }
+
+    function atualizarStatus(selectObj, denunciaId) {
+        let denunciaModificada = {};
+        denunciaModificada.status = selectObj.value;
+        $.post("/" + denunciaId, denunciaModificada)
+            .done(flashSuccess)
+            .fail(flashFail);
+    }
+
+    function atualizarVisibilidade(selectObj, denunciaId) {
+        let denunciaModificada = {};
+        denunciaModificada.visibilidade = selectObj.value;
+        $.post("/" + denunciaId, denunciaModificada)
+            .done(flashSuccess)
+            .fail(flashFail);
+    }
+
+    function flashSuccess(data){
+        message = "<div class='alert alert-success alert-dismissible fade show'>"+
+            data.message+
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+            "<span aria-hidden='true'>&times;</span>"+
+            "</button>"+
+            "</div>";
+        $("#flashMsgContainer").append(message);
+    }
+
+    function flashFail(data){
+        message = "<div class='alert alert-danger alert-dismissible fade show'>"+
+            data.responseJSON.message+
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+            "<span aria-hidden='true'>&times;</span>"+
+            "</button>"+
+            "</div>";
+        $("#flashMsgContainer").append(message);
+    }
+
+    function filtrar(){
+        let filtros ={
+            status : $("#Status").val(),
+            dataInicio: $("#DataInicio").val(),
+            dataFim: $("#DataFim").val()
+        }
+        $.get("/admin/home?status="+filtros.status+"&dataInicio="+filtros.dataInicio+"&dataFim="+filtros.dataFim, (data, status)=>{
+            if(status == "success"){
+                let tabela = $(data).find('#tabelaDenuncias').html();
+                $("#tabelaDenuncias").html(tabela);
+            }
+        });
+    }
+</script>
