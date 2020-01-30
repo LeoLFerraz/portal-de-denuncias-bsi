@@ -4,7 +4,7 @@
         <form class="row">
             <div class="col-lg-3 mb-3">
                 <legend>Status:</legend>
-                <select class="custom-select" id="Status" name="status">
+                <select class="custom-select" id="StatusMobile" name="status">
                     <option selected value="">Todas</option>
                     <option value="0">Cancelada</option>
                     <option value="1">Submetida</option>
@@ -16,12 +16,12 @@
 
             <div class="col-lg-3">
                 <legend>Inicio:</legend>
-                <input class="custom-select" type="date" name="dataInicio" id="DataInicio">
+                <input class="custom-select" type="date" name="dataInicioMobile" id="DataInicio">
             </div>
 
             <div class="col-lg-3">
                 <legend>Fim:</legend>
-                <input class="custom-select" type="date" name="dataFim" id="DataFim">
+                <input class="custom-select" type="date" name="dataFimMobile" id="DataFim">
             </div>
 
             <div class="col-lg-3">
@@ -30,7 +30,7 @@
         </form>
     </div>
 
-    <div>
+    <div id="cardsDenunciaAdmin">
         <% denuncias.forEach(denuncia => { %>
             <% let denunciaShortString = ""; %>
             <% if(denuncia.descricao.substr(71, 72)) {
@@ -104,14 +104,14 @@
 
     function filtrar(){
         let filtros ={
-            status : $("#Status").val(),
-            dataInicio: $("#DataInicio").val(),
-            dataFim: $("#DataFim").val()
+            status : $("#StatusMobile").val(),
+            dataInicio: $("#DataInicioMobile").val(),
+            dataFim: $("#DataFimMobile").val()
         }
         $.get("/admin/home?status="+filtros.status+"&dataInicio="+filtros.dataInicio+"&dataFim="+filtros.dataFim, (data, status)=>{
             if(status == "success"){
-                let tabela = $(data).find('#tabelaDenuncias').html();
-                $("#tabelaDenuncias").html(tabela);
+                let tabela = $(data).find('#cardsDenunciaAdmin').html();
+                $("#cardsDenunciaAdmin").html(tabela);
             }
         });
     }
