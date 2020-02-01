@@ -1,4 +1,28 @@
 <div class="container">
+    <div class="modal fade" id="editarObservacao" tabindex="-1" role="dialog" aria-labelledby="editarObservacao" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarObservacao">Insira a observação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="hidden" id="idObservacao" value="">
+                            <label for="message-text" class="col-form-label">Observação:</label>
+                            <textarea class="form-control" id="textAreaObservacao"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="atualizarObservacao()" data-dismiss="modal">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="filtragem">
         <div><span>Filtrar Relatório</span></div>
         <form class="row">
@@ -16,12 +40,12 @@
 
             <div class="col-lg-3">
                 <legend>Inicio:</legend>
-                <input class="custom-select" type="date" name="dataInicioMobile" id="DataInicio">
+                <input class="custom-select" type="date" name="dataInicioMobile" id="dataInicioMobile">
             </div>
 
             <div class="col-lg-3">
                 <legend>Fim:</legend>
-                <input class="custom-select" type="date" name="dataFimMobile" id="DataFim">
+                <input class="custom-select" type="date" name="dataFimMobile" id="dataFimMobile">
             </div>
 
             <div class="col-lg-3">
@@ -39,20 +63,47 @@
                 denunciaShortString = denuncia.descricao.substr(0, 70);
             }%>
             <% let denunciaFullString = denuncia.descricao;%>
-            <% let denunciaShortHandle = denuncia.datahoraSubmissao.toLocaleString() + ' - ' + denunciaShortString;%>
+            <% let denunciaData = denuncia.datahoraSubmissao.toLocaleString();%>
             <div class="card denunciaCard">
                 <h5 class="card-header denunciaCardHeader">
-                    <a class="collapsed d-block" data-toggle="collapse" href="#<%= denuncia._id%>" aria-expanded="true" aria-controls="collapse-collapsed" id="<%= denuncia._id%>Collapser">
+                    <a class="collapsed d-block text-info" data-toggle="collapse" href="#<%= denuncia._id%>" aria-expanded="true" aria-controls="collapse-collapsed" id="<%= denuncia._id%>Collapser">
                         <i class="fa fa-chevron-down pull-right"></i>
-                        <%= denunciaShortHandle %>
+                        <span style="color: rgba(255,114,0,0.38)"><%= denunciaData %> - </span> <%= denunciaShortString %>
                     </a>
                 </h5>
                 <div id="<%= denuncia._id%>" class="collapse" aria-labelledby="heading-collapsed">
                     <div class="card-body">
                         <%= denunciaFullString %>
                     </div>
+                    <form>
+                        <div>
+                            <select class="custom-select selectAdminMobile" onchange="atualizarResponsavel(this,'<%= denuncia._id%>')">
+                                <option>Nenhum</option>
+                                <%usuarios.forEach(usuario => { %>
+                                    <option <% if(usuario.nome == denuncia.responsavel){%> selected <%}%>> <%= usuario.nome %> </option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div>
+                            <select class="custom-select selectAdminMobile" onchange="atualizarVisibilidade(this,'<%= denuncia._id %>')">
+                                <option <% if(denuncia.visibilidade == 0){%> selected <%}%> value="0">Apenas Comissão</option>
+                                <option <% if(denuncia.visibilidade == 1){%> selected <%}%> value="1">Pública</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select class="custom-select selectAdminMobile" onchange="atualizarStatus(this,'<%= denuncia._id %>')">
+                                <option <% if(denuncia.status == 0){%> selected <%}%> value="0">Cancelada</option>
+                                <option <% if(denuncia.status == 1){%> selected <%}%> value="1">Submetida</option>
+                                <option <% if(denuncia.status == 2){%> selected <%}%> value="2">Em Revisão</option>
+                                <option <% if(denuncia.status == 3){%> selected <%}%> value="3">Aprovada</option>
+                                <option <% if(denuncia.status == 4){%> selected <%}%> value="4">Solucionada</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary selectAdminMobile" data-toggle="modal" data-target="#editarObservacao" onclick="inserirIdObservacao('<%= denuncia._id%>')">Observação <i class="fas fa-pencil-alt"></i></button>
+                    </form>
                 </div>
             </div>
+
         <%});%>
     </div>
 </div>

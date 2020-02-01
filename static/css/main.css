@@ -317,6 +317,28 @@ table span{
 
 .card-body{
     background-color: white;
+    border-collapse: separate !important;
+    border-radius: 25px !important;
+}
+
+.denunciaCard {
+    border-radius: 25px !important;
+    border-collapse: separate !important;
+}
+
+.card-header {
+    border-radius: 25px !important;
+    border-collapse: separate !important;
+    background-color: transparent !important;
+}
+
+.selectAdminMobile {
+    margin: 0px 20px 20px 20px;
+    width: 90%;
+}
+
+.card-header {
+
 }
 
 #tabelaDenunciasAdmin {
